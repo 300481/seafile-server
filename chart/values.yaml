@@ -1,0 +1,57 @@
+# Default values for seafile-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+db:
+  image: mariadb:10.1
+  container_name: seafile-mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=db_dev  # Requested, set the root's password of MySQL service.
+    - MYSQL_LOG_CONSOLE=true
+
+memcached:
+  image: memcached:1.5.6
+  container_name: seafile-memcached
+  entrypoint: memcached -m 256
+        
+seafile:
+  image: seafileltd/seafile-mc:latest
+  container_name: seafile
+  environment:
+    - DB_HOST=db
+    - DB_ROOT_PASSWD=db_dev  # Requested, the value shuold be root's password of MySQL service.
+    - TIME_ZONE=Etc/UTC  # Optional, default is UTC. Should be uncomment and set to your local time zone.
+    - SEAFILE_ADMIN_EMAIL=me@example.com # Specifies Seafile admin user, default is 'me@example.com'.
+    - SEAFILE_ADMIN_PASSWORD=asecret     # Specifies Seafile admin password, default is 'asecret'.
+    - SEAFILE_SERVER_LETSENCRYPT=false   # Whether to use https or not.
+    - SEAFILE_SERVER_HOSTNAME=docs.seafile.com # Specifies your host name if https is enabled.
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
