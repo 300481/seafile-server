@@ -1,0 +1,26 @@
+{{- if .Values.persistence.volumeClaim -}}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.persistence.databaseVolumeName }}
+spec:
+  storageClassName: {{ .Values.persistence.volumeClaim.storageClassName }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.volumeClaim.size.db }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.persistence.dataVolumeName }}
+spec:
+  storageClassName: {{ .Values.persistence.volumeClaim.storageClassName }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.volumeClaim.size.data }}
+{{- end }}
