@@ -17,19 +17,19 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       volumes:
-        - name: {{ .Values.persistence.databaseVolumeName }}
+        - name: seafile-db
           persistentVolumeClaim:
-            claimName: {{ .Values.persistence.databaseVolumeName }}
-        - name: {{ .Values.persistence.dataVolumeName }}
+            claimName: seafile-db
+        - name: seafile-data
           persistentVolumeClaim:
-            claimName: {{ .Values.persistence.dataVolumeName }}
+            claimName: seafile-data
       containers:
         - name: seafile-mysql
           image: {{ .Values.db.image }}
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: "/var/lib/mysql"
-              name: {{ .Values.persistence.databaseVolumeName }}
+              name: seafile-db
           env:
 {{ toYaml .Values.db.environment | indent 10 }}
         - name: seafile-memcached
@@ -46,7 +46,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: "/shared"
-              name: {{ .Values.persistence.dataVolumeName }}
+              name: seafile-data
           env:
 {{ toYaml .Values.seafile.environment | indent 10 }}
           ports:

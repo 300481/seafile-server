@@ -3,7 +3,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ .Values.persistence.databaseVolumeName }}
+  name: seafile-db
 spec:
   storageClassName: {{ .Values.persistence.volumeClaim.storageClassName }}
   accessModes:
@@ -15,7 +15,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ .Values.persistence.dataVolumeName }}
+  name: seafile-data
 spec:
   storageClassName: {{ .Values.persistence.volumeClaim.storageClassName }}
   accessModes:
