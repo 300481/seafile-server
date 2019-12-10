@@ -4,54 +4,55 @@
 
 db:
   image: mariadb:10.1
-  container_name: seafile-mysql
   environment:
-    - MYSQL_ROOT_PASSWORD=db_dev  # Requested, set the root's password of MySQL service.
-    - MYSQL_LOG_CONSOLE=true
+    - name: MYSQL_ROOT_PASSWORD
+      value: "db_dev"  # Requested, set the root's password of MySQL service.
+    - name: MYSQL_LOG_CONSOLE
+      value: "true"
 
 memcached:
   image: memcached:1.5.6
-  container_name: seafile-memcached
-  entrypoint: memcached -m 256
         
 seafile:
-  image: seafileltd/seafile-mc:latest
+  image: seafileltd/seafile-mc:7.0.5
   container_name: seafile
   environment:
-    - DB_HOST=db
-    - DB_ROOT_PASSWD=db_dev  # Requested, the value shuold be root's password of MySQL service.
-    - TIME_ZONE=Etc/UTC  # Optional, default is UTC. Should be uncomment and set to your local time zone.
-    - SEAFILE_ADMIN_EMAIL=me@example.com # Specifies Seafile admin user, default is 'me@example.com'.
-    - SEAFILE_ADMIN_PASSWORD=asecret     # Specifies Seafile admin password, default is 'asecret'.
-    - SEAFILE_SERVER_LETSENCRYPT=false   # Whether to use https or not.
-    - SEAFILE_SERVER_HOSTNAME=docs.seafile.com # Specifies your host name if https is enabled.
-
-service:
-  type: ClusterIP
-  port: 80
+    - name: DB_HOST
+      value: "127.0.0.1"
+    - name: DB_ROOT_PASSWD
+      value: "db_dev"
+    - name: TIME_ZONE
+      value: "Etc/UTC"
+    - name: SEAFILE_ADMIN_EMAIL
+      value: "seafileadmin@example.com"
+    - name: SEAFILE_ADMIN_PASSWORD
+      value: "secretpassword"
+    - name: SEAFILE_SERVER_LETSENCRYPT
+      value: "false"
+      # !!! update the service and seahub URL to https in the Web-UI !!!
+    - name: SEAFILE_SERVER_HOSTNAME
+      value: "seafile.example.com"
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths: []
+  enabled: true
+  annotations:
+    # use NGINX Ingress Controller
+    kubernetes.io/ingress.class: "nginx"
+    # use Cert-Manager for LetsEncrypt Certificates
+    cert-manager.io/issuer: "letsencrypt-prod"
+    # disable max body size check
+    # https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size
+    # http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  tls:
+    host: "seafile.example.com"
+    secretName: seafile-tls
 
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+persistence:
+  volumeClaim:
+    # this example uses existing hostPath volumes "storageClassName: manual"
+    # https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume
+    storageClassName: manual
+    size:
+      db: 500Mi
+      data: 20Gi
