@@ -1,52 +1,55 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "seafile-server.fullname" . }}
+  name: {{ include "seafile.fullname" . }}
   labels:
-{{ include "seafile-server.labels" . | indent 4 }}
+{{ include "seafile.labels" . | indent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "seafile-server.name" . }}
+      app.kubernetes.io/name: {{ include "seafile.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "seafile-server.name" . }}
+        app.kubernetes.io/name: {{ include "seafile.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-    {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+      volumes:
+        - name: {{ .Values.persistence.databaseVolumeName }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.databaseVolumeName }}
+        - name: {{ .Values.persistence.dataVolumeName }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.dataVolumeName }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: seafile-mysql
+          image: {{ .Values.db.image }}
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: {{ .Values.persistence.databaseVolumeName }}
+          env:
+{{ toYaml .Values.db.environment | indent 10 }}
+        - name: seafile-memcached
+          image: {{ .Values.memcached.image }}
+          imagePullPolicy: Always
+          command: ["memcached"]
+          args: ["-m", "256"]
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+          - name: memcached
+            containerPort: 11211
+            protocol: TCP
+        - name: seafile
+          image: {{ .Values.seafile.image }}
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: "/shared"
+              name: {{ .Values.persistence.dataVolumeName }}
+          env:
+{{ toYaml .Values.seafile.environment | indent 10 }}
+          ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
