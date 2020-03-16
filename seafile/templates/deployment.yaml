@@ -19,10 +19,10 @@ spec:
       volumes:
         - name: seafile-db
           persistentVolumeClaim:
-            claimName: seafile-db
+            claimName: {{ .Values.db.volumeClaimName }}
         - name: seafile-data
           persistentVolumeClaim:
-            claimName: seafile-data
+            claimName: {{ .Values.seafile.volumeClaimName }}
       containers:
         - name: seafile-mysql
           image: {{ .Values.db.image }}
