@@ -37,10 +37,6 @@ spec:
           imagePullPolicy: Always
           command: ["memcached"]
           args: ["-m", "256"]
-          ports:
-          - name: memcached
-            containerPort: 11211
-            protocol: TCP
         - name: seafile
           image: {{ .Values.seafile.image }}
           imagePullPolicy: Always
