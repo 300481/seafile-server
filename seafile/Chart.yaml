@@ -1,5 +1,19 @@
 apiVersion: v2
-appVersion: "8.0.4"
-description: A Helm chart for Seafile Server
 name: seafile
+description: A Helm chart for Seafile Server
+type: application
 version: 0.3.0
+appVersion: 8.0.4
+home: https://github.com/300481/seafile-server
+description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
+keywords:
+  - cloud
+  - file
+  - share
+  - sync
+sources:
+  - https://github.com/300481/seafile-server
+maintainers:
+  - name: "300481"
+engine: gotpl
+kubeVersion: ">=1.16.0-0"
