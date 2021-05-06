@@ -2,6 +2,8 @@
 
 Helm chart for Seafile Server
 
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/dr300481)](https://artifacthub.io/packages/search?repo=dr300481)
+
 # install
 
 ```
