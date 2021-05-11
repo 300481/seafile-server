@@ -18,6 +18,9 @@ maintainers:
 engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
+  artifacthub.io/changes: |
+    - Updated Seafile to v8.0.4
+    - Updated MariaDB to v10.5
   artifacthub.io/images: |
     - name: Seafile
       image: 300481/seafile:8.0.4
