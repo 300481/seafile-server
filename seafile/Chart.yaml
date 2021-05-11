@@ -17,3 +17,14 @@ maintainers:
   - name: "300481"
 engine: gotpl
 kubeVersion: ">=1.16.0-0"
+annotations:
+  artifacthub.io/images: |
+    - name: Seafile
+      image: 300481/seafile:8.0.4
+    - name: Memcached
+      image: memcached:1.5.6
+    - name: MariaDB
+      image: mariadb:10.5
+  artifacthub.io/maintainers: |
+    - name: 300481
+      email: 300481@300481.de
