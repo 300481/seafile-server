@@ -2,7 +2,7 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.4.1
+version: 0.4.2
 appVersion: 8.0.4
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
@@ -19,7 +19,7 @@ engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - Use current Memcached Alpine based image to reduce CVEs
+    - Use newest updated Seafile container to reduce CVEs
   artifacthub.io/images: |
     - name: Seafile
       image: 300481/seafile:8.0.4

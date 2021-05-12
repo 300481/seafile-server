@@ -15,7 +15,7 @@ memcached:
   image: memcached:1.6.9-alpine
 
 seafile:
-  image: 300481/seafile:8.0.4
+  image: 300481/seafile:8.0.4-20210512
   container_name: seafile
   environment:
     - name: DB_HOST
