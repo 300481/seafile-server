@@ -54,3 +54,6 @@ spec:
           - name: http
             containerPort: 80
             protocol: TCP
+          - name: memcached
+            containerPort: 11211
+            protocol: TCP

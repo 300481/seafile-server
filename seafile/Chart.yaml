@@ -2,7 +2,7 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.3.0
+version: 0.4.0
 appVersion: 8.0.4
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
@@ -19,8 +19,7 @@ engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - Updated Seafile to v8.0.4
-    - Updated MariaDB to v10.5
+    - Make Memcached available via service, so that Seafile is really using it
   artifacthub.io/images: |
     - name: Seafile
       image: 300481/seafile:8.0.4
