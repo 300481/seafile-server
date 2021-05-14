@@ -7,12 +7,12 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.4.2 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.4.3 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
 
-## from 0.3.0 to 0.4.2
+## from 0.3.0 to 0.4.3
 
 nothing to do
 
