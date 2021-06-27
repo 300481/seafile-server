@@ -2,7 +2,7 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.4.3
+version: 0.4.4
 appVersion: 8.0.5
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
