@@ -9,7 +9,9 @@ db:
       value: "db_dev"  # Requested, set the root's password of MySQL service.
     - name: MYSQL_LOG_CONSOLE
       value: "true"
-  volumeClaimName: seafile-db
+  volumeMounts:
+    - mountPath: "/var/lib/mysql"
+      name: seafile-db
 
 memcached:
   image: memcached:1.6.9-alpine
@@ -33,7 +35,17 @@ seafile:
       # !!! update the service and seahub URL to https in the Web-UI !!!
     - name: SEAFILE_SERVER_HOSTNAME
       value: "seafile.example.com"
-  volumeClaimName: seafile-data
+  volumeMounts:
+    - mountPath: "/shared"
+      name: seafile-data
+
+volumes:
+  - name: seafile-db
+    persistentVolumeClaim:
+      claimName: seafile-db
+  - name: seafile-data
+    persistentVolumeClaim:
+      claimName: seafile-data
 
 ingress:
   enabled: true
