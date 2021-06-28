@@ -7,6 +7,9 @@ metadata:
 {{ include "seafile.labels" . | indent 4 }}
 spec:
   type: ClusterIP
+{{- if (eq .Values.kind "StatefulSet") }}
+  ClusterIP: "None"
+{{- end }}
   ports:
   - port: 80
     targetPort: http
@@ -24,6 +27,9 @@ metadata:
 {{ include "seafile.labels" . | indent 4 }}
 spec:
   type: ClusterIP
+{{- if (eq .Values.kind "StatefulSet") }}
+  ClusterIP: "None"
+{{- end }}
   ports:
   - port: 11211
     targetPort: memcached
