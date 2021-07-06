@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "seafile.fullname" . }}
+  labels:
+{{ include "seafile.labels" . | indent 4 }}
+spec:
+  serviceName: {{ include "seafile.fullname" . }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "seafile.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "seafile.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      {{- if .Values.seafile.extraVolumes }}
+      volumes:
+      {{- with .Values.seafile.extraVolumes }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- end }}
+      containers:
+      - name: seafile
+        image: {{ .Values.seafile.image }}
+        imagePullPolicy: Always
+        env:
+        - name: DB_HOST
+          value: "{{ .Release.Name }}-mariadb.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}"
+        - name: DB_ROOT_PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-mariadb"
+              key: mariadb-root-password
+        - name: SEAFILE_SERVER_LETSENCRYPT
+          value: "false"
+{{ toYaml .Values.seafile.environment | indent 8 }}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - name: seafile-data
+          mountPath: /shared
+        {{- with .Values.seafile.extraVolumeMounts }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: seafile-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: {{ .Values.seafile.persistence.size }}

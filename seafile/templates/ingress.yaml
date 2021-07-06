@@ -1,9 +1,12 @@
-{{- if .Values.ingress.enabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "seafile.fullname" . }}
   annotations:
+    # disable max body size check
+    # https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size
+    # http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
     {{- toYaml .Values.ingress.annotations | nindent 4 }}
 spec:
 {{- if .Values.ingress.tls }}
@@ -13,11 +16,13 @@ spec:
       secretName: {{ .Values.ingress.tls.secretName }}
 {{- end }}
   rules:
-  - host: {{ .Values.ingress.tls.host | quote }}
+  - host: {{ .Values.ingress.host | quote }}
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: {{ include "seafile.fullname" . }}
-          servicePort: 80
-{{- end }}
+          service:
+            name: {{ include "seafile.fullname" . }}
+            port:
+              number: 80

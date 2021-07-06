@@ -2,8 +2,9 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.4.4
+version: 0.5.0
 appVersion: 8.0.5
+icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
 keywords:
@@ -19,14 +20,17 @@ engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - Update to Seafile v8.0.5 latest container build
+    - Change Seafile to StatefulSet
   artifacthub.io/images: |
     - name: Seafile
-      image: 300481/seafile:8.0.5-20210514
-    - name: Memcached
-      image: memcached:1.6.9-alpine
-    - name: MariaDB
-      image: mariadb:10.5
+      image: 300481/seafile:8.0.5-20210627
   artifacthub.io/maintainers: |
     - name: 300481
       email: 300481@300481.de
+dependencies:
+  - name: mariadb
+    version: 9.3.16
+    repository: https://charts.bitnami.com/bitnami
+  - name: memcached
+    version: 5.13.1
+    repository: https://charts.bitnami.com/bitnami
