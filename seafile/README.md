@@ -28,7 +28,7 @@ for the Seafile StatefulSet and for the MariaDB Statefulset.
 
 Additionally you must replace the container images by an image of your choice.
 
-For MariaDB you must deactivate the livenessProbe and readynessProbe.
+For MariaDB you must deactivate the livenessProbe and readinessProbe.
 
 Then copy/move the state from the previous volumes to the new dynamic provisioned ones.
 
