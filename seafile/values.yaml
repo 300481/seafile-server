@@ -2,51 +2,60 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-db:
-  image: mariadb:10.5
-  environment:
-    - name: MYSQL_ROOT_PASSWORD
-      value: "db_dev"  # Requested, set the root's password of MySQL service.
-    - name: MYSQL_LOG_CONSOLE
-      value: "true"
-  volumeClaimName: seafile-db
+clusterDomain: cluster.local
 
-memcached:
-  image: memcached:1.6.9-alpine
+# see Bitnami MariaDB Chart Values
+# https://artifacthub.io/packages/helm/bitnami/mariadb
+# mariadb:
+  # auth:
+  #   rootPassword: generated-pw-needed-for-chart-upgrade
+  # primary:
+  #   extraVolumes:
+  #   - name: mnt-data-db
+  #     persistentVolumeClaim:
+  #       claimName: mnt-data-db
+  #   extraVolumeMounts:
+  #   - mountPath: "/mnt/data/db"
+  #     name: mnt-data-db
+  #   livenessProbe:
+  #     enabled: false
+  #   readinessProbe:
+  #     enabled: false
+
+# see Bitnami Memcached Chart Values
+# https://artifacthub.io/packages/helm/bitnami/memcached
+# memcached: {}
 
 seafile:
   image: docker.io/300481/seafile:8.0.5-20210627
-  container_name: seafile
+  persistence:
+    size: 10Gi
   environment:
-    - name: DB_HOST
-      value: "127.0.0.1"
-    - name: DB_ROOT_PASSWD
-      value: "db_dev"
-    - name: TIME_ZONE
-      value: "Etc/UTC"
-    - name: SEAFILE_ADMIN_EMAIL
-      value: "seafileadmin@example.com"
-    - name: SEAFILE_ADMIN_PASSWORD
-      value: "secretpassword"
-    - name: SEAFILE_SERVER_LETSENCRYPT
-      value: "false"
-      # !!! update the service and seahub URL to https in the Web-UI !!!
-    - name: SEAFILE_SERVER_HOSTNAME
-      value: "seafile.example.com"
-  volumeClaimName: seafile-data
+  - name: TIME_ZONE
+    value: "Etc/UTC"
+  - name: SEAFILE_ADMIN_EMAIL
+    value: "seafileadmin@example.com"
+  - name: SEAFILE_ADMIN_PASSWORD
+    value: "secretpassword"
+    # !!! update the service and seahub URL to https in the Web-UI !!!
+  - name: SEAFILE_SERVER_HOSTNAME
+    value: "seafile.example.com"
+  # extraVolumes:
+  # - name: mnt-data-seafile
+  #   persistentVolumeClaim:
+  #     claimName: mnt-data-seafile
+  # extraVolumeMounts:
+  # - mountPath: "/mnt/data/seafile"
+  #   name: mnt-data-seafile
 
 ingress:
-  enabled: true
   annotations:
     # use NGINX Ingress Controller
     kubernetes.io/ingress.class: "nginx"
     # use Cert-Manager for LetsEncrypt Certificates
     # cert-manager.io/issuer: "letsencrypt-prod"
     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    # disable max body size check
-    # https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size
-    # http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-  tls:
-    host: "seafile.example.com"
-    secretName: seafile-tls
+  host: "seafile.example.com"
+# tls:
+#   host: "seafile.example.com"
+#   secretName: seafile-tls
