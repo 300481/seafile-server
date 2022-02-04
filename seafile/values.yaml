@@ -6,8 +6,9 @@ clusterDomain: cluster.local
 
 # see Bitnami MariaDB Chart Values
 # https://artifacthub.io/packages/helm/bitnami/mariadb
-# mariadb:
-  # auth:
+mariadb:
+  auth:
+    username: seafile
   #   rootPassword: generated-pw-needed-for-chart-upgrade
   # primary:
   #   extraVolumes:
