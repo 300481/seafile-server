@@ -9,10 +9,22 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.5.0 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.5.1 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.5.0 to 0.5.1
+
+This update is backward compatible.
+
+New value `pause: false`. If set to `true` the Seafile StatefulSet replica will be set to 0.
+
+This is a preparation for the following changes.
+
+The following changes will be the removal of the subcharts *mariadb* and *memcached*.
+
+It's planned to manage them in by their own charts.
 
 ## from 0.4.4 to 0.5.0
 
