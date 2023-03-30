@@ -6,7 +6,7 @@ metadata:
 {{ include "seafile.labels" . | indent 4 }}
 spec:
   serviceName: {{ include "seafile.fullname" . }}
-  replicas: 1
+  replicas: {{ if .Values.seafile.pause }}{{ 0 }}{{ else }}{{ 1 }}{{ end }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "seafile.name" . }}

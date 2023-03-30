@@ -28,6 +28,7 @@ clusterDomain: cluster.local
 
 seafile:
   image: docker.io/300481/seafile:8.0.5-20210627
+  pause: false
   persistence:
     size: 10Gi
   environment:
