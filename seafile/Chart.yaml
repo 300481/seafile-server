@@ -2,7 +2,7 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.5.1
+version: 0.5.2
 appVersion: 8.0.5
 icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
@@ -20,7 +20,7 @@ engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - Add value pause for Seafile StatefulSet
+    - add option to disable subchart memcached
   artifacthub.io/images: |
     - name: Seafile
       image: 300481/seafile:8.0.5-20210627
@@ -34,3 +34,4 @@ dependencies:
   - name: memcached
     version: 5.13.1
     repository: https://charts.bitnami.com/bitnami
+    condition: memcached.enabled

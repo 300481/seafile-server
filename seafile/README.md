@@ -7,10 +7,20 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.5.1 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.5.2 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+# from 0.5.1 to 0.5.2
+
+This update is backward compatible.
+
+New values for `memcached`.
+
+The subchart can be disabled and it is possible to set a FQDN for an external running memcached,
+
+if it is not running in the same namespace with the default service name of `memcached`.
 
 ## from 0.5.0 to 0.5.1
 
