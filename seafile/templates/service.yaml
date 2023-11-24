@@ -1,37 +1,15 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "seafile.fullname" . }}
+  name: {{ include "seafile.fullname" . }}-web
   labels:
-{{ include "seafile.labels" . | indent 4 }}
+    {{- include "seafile.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
-  clusterIP: "None"
   ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
-    app.kubernetes.io/name: {{ include "seafile.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-{{- if .Values.memcached.enabled }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: memcached
-spec:
-  type: ExternalName
-  externalName: "{{ .Release.Name }}-memcached.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}"
-{{- else if ne .Values.memcached.serviceFqdn "memcached" }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: memcached
-spec:
-  type: ExternalName
-  externalName: "{{ .Values.memcached.serviceFqdn }}"
-{{- end }}
+    {{- include "seafile.selectorLabels" . | nindent 4 }}

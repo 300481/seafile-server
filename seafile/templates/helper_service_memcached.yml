@@ -1,0 +1,19 @@
+{{- if .Values.memcached.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcached
+spec:
+  type: ExternalName
+  externalName: "{{ .Release.Name }}-memcached.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}"
+{{- else if ne .Values.memcached.serviceFqdn "memcached" }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcached
+spec:
+  type: ExternalName
+  externalName: "{{ .Values.memcached.serviceFqdn }}"
+{{- end }}
