@@ -29,7 +29,7 @@ memcached:
   serviceFqdn: memcached
 
 seafile:
-  image: docker.io/300481/seafile:8.0.5-20210627
+  image: docker.io/300481/seafile:8.0.85-20231130
   pause: false
   persistence:
     size: 10Gi

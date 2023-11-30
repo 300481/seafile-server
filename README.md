@@ -7,12 +7,18 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.5.2 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.5.3 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
 
-# from 0.5.1 to 0.5.2
+## from 0.5.2 to 0.5.3
+
+This update is backward compatible.
+
+Change is the new built seafile-docker image.
+
+## from 0.5.1 to 0.5.2
 
 This update is backward compatible.
 

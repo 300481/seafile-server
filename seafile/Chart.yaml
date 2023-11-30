@@ -2,8 +2,8 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.5.2
-appVersion: 8.0.5
+version: 0.5.3
+appVersion: 8.0.8
 icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
@@ -23,7 +23,7 @@ annotations:
     - add option to disable subchart memcached
   artifacthub.io/images: |
     - name: Seafile
-      image: 300481/seafile:8.0.5-20210627
+      image: 300481/seafile:8.0.8-20231130
   artifacthub.io/maintainers: |
     - name: 300481
       email: 300481@300481.de
