@@ -7,10 +7,20 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.5.3 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.6.0 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.5.3 to 0.6.0
+
+Version 0.6.0 is just a copy of 0.5.3, so there is 100% backward compatibility.
+
+The goal of 0.6.z is to explant the hard dependencies of MariaDB and Memcached subcharts.
+
+I want to deploy both by operators in the future to ensure better availability and upgrade options.
+
+In 0.7.z I plan to upgrade Seafile itself to the newer versions.
 
 ## from 0.5.2 to 0.5.3
 
