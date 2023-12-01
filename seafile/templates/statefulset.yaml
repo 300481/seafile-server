@@ -31,12 +31,15 @@ spec:
         imagePullPolicy: Always
         env:
         - name: DB_HOST
-          value: "{{ .Release.Name }}-mariadb.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}"
+          value: {{ .Values.seafile.database.hostname | quote }}
+          # value: "{{ .Release.Name }}-mariadb.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}"
         - name: DB_ROOT_PASSWD
           valueFrom:
             secretKeyRef:
-              name: "{{ .Release.Name }}-mariadb"
-              key: mariadb-root-password
+              name: {{ .Values.seafile.database.rootPasswordSecret.name }}
+              key: {{ .Values.seafile.database.rootPasswordSecret.key }}
+              # name: "{{ .Release.Name }}-mariadb"
+              # key: mariadb-root-password
         - name: SEAFILE_SERVER_LETSENCRYPT
           value: "false"
 {{ toYaml .Values.seafile.environment | indent 8 }}

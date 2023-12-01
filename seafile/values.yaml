@@ -34,6 +34,11 @@ seafile:
   persistence:
     size: 10Gi
     storageClassName: {}
+  database:
+    hostname: {}
+    rootPasswordSecret:
+      name: {}
+      key: {}
   environment:
   - name: TIME_ZONE
     value: "Etc/UTC"

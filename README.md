@@ -7,10 +7,25 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.6.2 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.6.3 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.6.2 to 0.6.3
+
+Add section *database* in Seafile values.
+
+You now **must** set the database hostname and the secret-details with the root-password
+
+```yaml
+seafile:
+  database:
+    hostname: {}
+    rootPasswordSecret:
+      name: {}
+      key: {}
+```
 
 ## from 0.6.1 to 0.6.2
 
