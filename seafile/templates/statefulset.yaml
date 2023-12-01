@@ -55,8 +55,8 @@ spec:
       name: seafile-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      {{- if .Values.seafile.storageClassName }}
-      storageClassName: {{ .Values.seafile.storageClassName }}
+      {{- if .Values.seafile.persistence.storageClassName }}
+      storageClassName: {{ .Values.seafile.persistence.storageClassName }}
       {{- end }}
       resources:
         requests:

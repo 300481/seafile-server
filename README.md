@@ -7,10 +7,16 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.6.1 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.6.2 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.6.1 to 0.6.2
+
+Just a fix to the prior version:
+
+```seafile.storageClassName``` to ```seafile.persistence.storageClassName```
 
 ## from 0.6.0 to 0.6.1
 

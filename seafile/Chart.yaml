@@ -2,7 +2,7 @@ apiVersion: v2
 name: seafile
 description: A Helm chart for Seafile Server
 type: application
-version: 0.6.1
+version: 0.6.2
 appVersion: 8.0.8
 icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
@@ -20,7 +20,7 @@ engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - add storageClassName value for Seafile
+    - fix storageClassName value for Seafile StatefulSet
   artifacthub.io/images: |
     - name: Seafile
       image: 300481/seafile:8.0.8-20231130
