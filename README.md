@@ -7,10 +7,16 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.6.0 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.6.1 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.6.0 to 0.6.1
+
+Add ```seafile.storageClassName``` to be able to set the Storage Class Name of the Seafile Persistent Volume.
+
+If left empty, it will further use the default one.
 
 ## from 0.5.3 to 0.6.0
 

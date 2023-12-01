@@ -33,6 +33,7 @@ seafile:
   pause: false
   persistence:
     size: 10Gi
+    storageClassName: {}
   environment:
   - name: TIME_ZONE
     value: "Etc/UTC"
