@@ -7,10 +7,16 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.6.3 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.6.4 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.6.3 to 0.6.4
+
+Make dependency MariaDB optional with enable-switch.
+
+By default enabled and backward compatible.
 
 ## from 0.6.2 to 0.6.3
 

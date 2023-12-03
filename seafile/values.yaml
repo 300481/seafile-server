@@ -28,6 +28,9 @@ memcached:
   enabled: true
   serviceFqdn: memcached
 
+mariadb:
+  enabled: true
+
 seafile:
   image: docker.io/300481/seafile:8.0.85-20231130
   pause: false
