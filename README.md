@@ -14,10 +14,16 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.7.0 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.7.1 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.7.0 to 0.7.1
+
+Backward compatible change.
+
+Add option ```seafile.persistence.existingClaim``` to be able to use existing Persistent Volumes for Seafile data.
 
 ## from 0.6.4 to 0.7.0
 

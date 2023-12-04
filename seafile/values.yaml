@@ -37,6 +37,7 @@ seafile:
   persistence:
     size: 10Gi
     storageClassName: {}
+    existingClaim: {}
   database:
     hostname: {}
     rootPasswordSecret:

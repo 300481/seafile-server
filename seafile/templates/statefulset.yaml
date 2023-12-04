@@ -19,6 +19,12 @@ spec:
         app.kubernetes.io/name: {{ include "seafile.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      {{- if .Values.seafile.persistence.existingClaim }}
+      volumes:
+        name: seafile-data
+        persistentVolumeClaim:
+          claimName: {{ .Values.seafile.persistence.existingClaim }}
+      {{- end }}
       containers:
       - name: seafile
         image: {{ .Values.seafile.image }}
@@ -44,6 +50,7 @@ spec:
         volumeMounts:
         - name: seafile-data
           mountPath: /shared
+{{- if not .Values.seafile.persistence.existingClaim }}
   volumeClaimTemplates:
   - metadata:
       name: seafile-data
@@ -55,3 +62,4 @@ spec:
       resources:
         requests:
           storage: {{ .Values.seafile.persistence.size }}
+{{- end }}
