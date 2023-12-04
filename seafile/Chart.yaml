@@ -20,7 +20,7 @@ engine: gotpl
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - add option seafile.persistence.existingClaim
+    - fix existingClaim option in StatefulSet
   artifacthub.io/images: |
     - name: Seafile
       image: 300481/seafile:8.0.8-20231130
