@@ -4,13 +4,26 @@ Helm chart for Seafile Server
 
 # install
 
+## prerequisites
+
+* Install a MariaDB instance
+* Create a secret containing the database root password in the same namespace as Seafile
+* Set Values for ```seafile.database.rootPasswordSecret``` and ```seafile.database.hostname```
+
+## installation command
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.6.4 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.7.0 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.6.4 to 0.7.0
+
+This is a breaking change!
+
+The *extraVolumes* and *extraVolumeMounts* are removed and not available anymore.
 
 ## from 0.6.3 to 0.6.4
 

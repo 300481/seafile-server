@@ -32,7 +32,7 @@ mariadb:
   enabled: true
 
 seafile:
-  image: docker.io/300481/seafile:8.0.85-20231130
+  image: docker.io/300481/seafile:8.0.8-20231130
   pause: false
   persistence:
     size: 10Gi
@@ -52,13 +52,6 @@ seafile:
     # !!! update the service and seahub URL to https in the Web-UI !!!
   - name: SEAFILE_SERVER_HOSTNAME
     value: "seafile.example.com"
-  # extraVolumes:
-  # - name: mnt-data-seafile
-  #   persistentVolumeClaim:
-  #     claimName: mnt-data-seafile
-  # extraVolumeMounts:
-  # - mountPath: "/mnt/data/seafile"
-  #   name: mnt-data-seafile
 
 ingress:
   annotations:
