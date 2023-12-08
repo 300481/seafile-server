@@ -145,3 +145,48 @@ nothing to do
 ## from 0.2.5 to 0.3.0
 
 run `mysql_upgrade -u root -p` inside the mysql container because of upgrade from mariadb:10.1 to mariadb:10.5
+
+# Data export / import
+
+Here are some code snippets to handle Database data export / import, related to Seafile.
+
+## connect to database
+
+```bash
+export ROOT_PASSWORD=mysecretpassword
+mysql -uroot -p${ROOT_PASSWORD} -h mariadb.seafile.svc.cluster.local
+```
+
+## create databases
+
+```sql
+create database `ccnet_db` character set = 'utf8';
+create database `seafile_db` character set = 'utf8';
+create database `seahub_db` character set = 'utf8';
+
+create user 'seafile'@'%' identified by 'mysecretseafilepassword';
+
+GRANT ALL PRIVILEGES ON `ccnet_db`.* to `seafile`@`%`;
+GRANT ALL PRIVILEGES ON `seafile_db`.* to `seafile`@`%`;
+GRANT ALL PRIVILEGES ON `seahub_db`.* to `seafile`@`%`;
+```
+
+## export databases
+
+```bash
+export ROOT_PASSWORD=mysecretpassword
+
+for database in ccnet seafile seahub; do
+  mysqldump -uroot -p${ROOT_PASSWORD} -h mariadb.seafile.svc.cluster.local ${database}_db > ${database}_db.sql
+done
+```
+
+## import databases
+
+```bash
+export ROOT_PASSWORD=mysecretpassword
+
+for database in ccnet seafile seahub; do
+  mysql -uroot -p${ROOT_PASSWORD} -h mariadb.seafile.svc.cluster.local ${database}_db < ${database}_db.sql
+done
+```
