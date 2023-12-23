@@ -2,35 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-clusterDomain: cluster.local
-
-# see Bitnami MariaDB Chart Values
-# https://artifacthub.io/packages/helm/bitnami/mariadb
-# mariadb:
-  # auth:
-  #   rootPassword: generated-pw-needed-for-chart-upgrade
-  # primary:
-  #   extraVolumes:
-  #   - name: mnt-data-db
-  #     persistentVolumeClaim:
-  #       claimName: mnt-data-db
-  #   extraVolumeMounts:
-  #   - mountPath: "/mnt/data/db"
-  #     name: mnt-data-db
-  #   livenessProbe:
-  #     enabled: false
-  #   readinessProbe:
-  #     enabled: false
-
-# see Bitnami Memcached Chart Values
-# https://artifacthub.io/packages/helm/bitnami/memcached
-memcached:
-  enabled: true
-  serviceFqdn: memcached
-
-mariadb:
-  enabled: true
-
 seafile:
   image: docker.io/300481/seafile:8.0.8-20231223
   pause: false

@@ -14,10 +14,18 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.7.3 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.8.0 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.7.3 to 0.8.0
+
+This CAN be a breaking change.
+
+The dependencies are removed and some cosmetic cleanups are done.
+
+You now need to provide a MariaDB and Memcached by yourself, it is not installed by the Chart anymore.
 
 ## from 0.7.2 to 0.7.3
 
