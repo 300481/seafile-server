@@ -32,7 +32,7 @@ mariadb:
   enabled: true
 
 seafile:
-  image: docker.io/300481/seafile:8.0.8-20231130
+  image: docker.io/300481/seafile:8.0.8-20231223
   pause: false
   persistence:
     size: 10Gi
