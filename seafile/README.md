@@ -2,6 +2,30 @@
 
 Helm chart for Seafile Server
 
+# on my own behalf
+
+For me it is just a "hobby project". But I've seen that my own built docker images
+
+for Seafile Version 6, 7 and 8 were pulled more than 4,5k times.
+
+I've contributed a small but essential change to Seafile-Docker to make it usable in Kubernetes.
+
+This change is included from Version 9 of Seafile.
+
+I assume, my Helm Chart is used by many people and from now I plan to use the official images of Haiwen in my Helm Chart.
+
+All the work on the Helm Chart is done in my free time. So it is not perfect.
+
+There are many things to do (e.g. Resource Requests and maybe Limits, Readiness Probes, Container Permissions ...).
+
+If you like this Chart, I would be happy to get a small appreciation maybe by a direct message
+
+with a "Thank you" on [LinkedIn](https://www.linkedin.com/in/dennis-riemenschneider/).
+
+If you would like to improve the Chart don't hesitate and create a Pull Request on GitHub.
+
+I'll do my best to check and merge your contributions.
+
 # install
 
 ## prerequisites
@@ -18,6 +42,10 @@ helm upgrade --install seafile seafile/seafile --version 0.11.2 --values YOUR-VA
 ```
 
 # upgrade
+
+## from 0.11.2 to 0.11.3
+
+Only updated the README.md
 
 ## from 0.11.1 to 0.11.2
 
