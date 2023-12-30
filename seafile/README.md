@@ -14,10 +14,16 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.9.2 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.9.3 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.9.2 to 0.9.3
+
+Just an update to Seafile 9.0.5
+
+Backward compatible.
 
 ## from 0.9.1 to 0.9.2
 
