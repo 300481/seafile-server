@@ -1,8 +1,8 @@
 apiVersion: v2
 name: seafile
 type: application
-version: 0.8.0
-appVersion: 8.0.8
+version: 0.9.0
+appVersion: 9.0.2
 icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
@@ -21,7 +21,7 @@ annotations:
     - cleanup dependencies
   artifacthub.io/images: |
     - name: Seafile
-      image: 300481/seafile:8.0.8-20231223
+      image: docker.io/seafileltd/seafile-mc:9.0.2
   artifacthub.io/maintainers: |
     - name: 300481
       email: 300481@300481.de

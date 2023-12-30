@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 seafile:
-  image: docker.io/300481/seafile:8.0.8-20231223
+  image: docker.io/seafileltd/seafile-mc:9.0.2
   pause: false
   persistence:
     size: 10Gi
