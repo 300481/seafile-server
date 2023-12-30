@@ -38,6 +38,8 @@ spec:
               key: {{ .Values.seafile.database.rootPasswordSecret.key }}
         - name: SEAFILE_SERVER_LETSENCRYPT
           value: "false"
+        - name: FORCE_HTTPS_IN_CONF
+          value: "true"
         ports:
         - name: http
           containerPort: 80

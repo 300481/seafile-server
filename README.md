@@ -14,10 +14,22 @@ Helm chart for Seafile Server
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.9.8 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.10.0 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.9.8 to 0.10.0
+
+Update to Seafile 10.0.1
+
+Backward compatible.
+
+Add variable ```FORCE_HTTPS_IN_CONF=true``` for StatefulSet
+
+Please see [Documentation](https://manual.seafile.com/docker/deploy_seafile_with_docker/#lets-encrypt-ssl-certificate)
+
+This is needed when using an additional reverse proxy and providing your own certificates e.g. with Cert-Manager.
 
 ## from 0.9.7 to 0.9.8
 
