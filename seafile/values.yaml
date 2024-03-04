@@ -36,3 +36,22 @@ ingress:
 # tls:
 #   host: "seafile.example.com"
 #   secretName: seafile-tls
+
+# ref: https://github.com/bitnami/charts/blob/main/bitnami/mariadb/values.yaml
+mariadb:
+  enabled: false
+  architecture: standalone
+
+  auth:
+    ## @param auth.existingSecret Use existing secret for password details (`auth.rootPassword`, `auth.password`, `auth.replicationPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-root-password`, `mariadb-replication-password` and `mariadb-password`
+    existingSecret: ""
+
+  primary:
+    ## Enable persistence using Persistent Volume Claims
+    ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+    persistence:
+      enabled: false
+      storageClass: ""
+      size: 10Gi
+      accessMode: ReadWriteOnce
+
