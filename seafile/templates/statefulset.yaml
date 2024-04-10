@@ -55,6 +55,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: seafile-data
+      annotations:
+        helm.sh/resource-policy: keep
     spec:
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.seafile.persistence.storageClassName }}
