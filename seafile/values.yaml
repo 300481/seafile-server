@@ -36,3 +36,4 @@ ingress:
 # tls:
 #   host: "seafile.example.com"
 #   secretName: seafile-tls
+# nodeSelector: {}
