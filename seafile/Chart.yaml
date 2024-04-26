@@ -1,7 +1,7 @@
 apiVersion: v2
 name: seafile
 type: application
-version: 0.11.3
+version: 0.12.0
 appVersion: 11.0.3
 icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
@@ -18,7 +18,8 @@ maintainers:
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - update README.md
+    - add optional nodeSelector
+    - add helm.sh/resource-policy: keep for PVC
   artifacthub.io/images: |
     - name: Seafile
       image: docker.io/seafileltd/seafile-mc:11.0.3
