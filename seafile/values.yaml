@@ -21,9 +21,10 @@ seafile:
     value: "seafileadmin@example.com"
   - name: SEAFILE_ADMIN_PASSWORD
     value: "secretpassword"
-    # !!! update the service and seahub URL to https in the Web-UI !!!
   - name: SEAFILE_SERVER_HOSTNAME
     value: "seafile.example.com"
+
+# nodeSelector: {}
 
 ingress:
   annotations:
@@ -33,7 +34,6 @@ ingress:
     # cert-manager.io/issuer: "letsencrypt-prod"
     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
   host: "seafile.example.com"
-# tls:
-#   host: "seafile.example.com"
-#   secretName: seafile-tls
-# nodeSelector: {}
+  # tls:
+  #   host: "seafile.example.com"
+  #   secretName: seafile-tls
