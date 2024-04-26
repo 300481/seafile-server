@@ -43,6 +43,12 @@ helm upgrade --install seafile seafile/seafile --version 0.12.0 --values YOUR-VA
 
 # upgrade
 
+## from 0.11.3 to 0.12.0
+
+Add optional nodeSelector and helm policy to keep PVC on uninstall.
+
+Backward compatible.
+
 ## from 0.11.2 to 0.11.3
 
 Only updated the README.md
