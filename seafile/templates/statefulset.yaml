@@ -24,6 +24,10 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.seafile.persistence.existingClaim }}
       {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
       - name: seafile
         image: {{ .Values.seafile.image }}
@@ -51,6 +55,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: seafile-data
+      annotations:
+        helm.sh/resource-policy: keep
     spec:
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.seafile.persistence.storageClassName }}
