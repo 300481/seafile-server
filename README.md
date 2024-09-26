@@ -38,10 +38,16 @@ I'll do my best to check and merge your contributions.
 ```
 helm repo add seafile https://300481.github.io/charts/
 helm repo update
-helm upgrade --install seafile seafile/seafile --version 0.12.0 --values YOUR-VALUES.yaml
+helm upgrade --install seafile seafile/seafile --version 0.12.1 --values YOUR-VALUES.yaml
 ```
 
 # upgrade
+
+## from 0.12.0 to 0.12.1
+
+Update Seafile to 11.0.12
+
+Backward compatible.
 
 ## from 0.11.3 to 0.12.0
 

@@ -1,8 +1,8 @@
 apiVersion: v2
 name: seafile
 type: application
-version: 0.12.0
-appVersion: 11.0.3
+version: 0.12.1
+appVersion: 11.0.12
 icon: https://www.seafile.com/media/img/seafile-logo.png
 home: https://github.com/300481/seafile-server
 description: Seafile Server, Reliable and Performant File Sync and Share Solution on Kubernetes
@@ -18,11 +18,10 @@ maintainers:
 kubeVersion: ">=1.16.0-0"
 annotations:
   artifacthub.io/changes: |
-    - add optional nodeSelector
-    - add helm.sh/resource-policy: keep for PVC
+    - Update to Seafile 11.0.12
   artifacthub.io/images: |
     - name: Seafile
-      image: docker.io/seafileltd/seafile-mc:11.0.3
+      image: docker.io/seafileltd/seafile-mc:11.0.12
   artifacthub.io/maintainers: |
     - name: 300481
       email: 300481@300481.de
