@@ -20,7 +20,7 @@ There are many things to do (e.g. Resource Requests and maybe Limits, Readiness 
 
 If you like this Chart, I would be happy to get a small appreciation maybe by a direct message
 
-with "Thank you" on [LinkedIn](https://www.linkedin.com/in/dennis-riemenschneider/).
+with a "Thank you" on [LinkedIn](https://www.linkedin.com/in/dennis-riemenschneider/).
 
 If you would like to improve the Chart don't hesitate and create a Pull Request on GitHub.
 
@@ -281,48 +281,3 @@ nothing to do
 ## from 0.2.5 to 0.3.0
 
 run `mysql_upgrade -u root -p` inside the mysql container because of upgrade from mariadb:10.1 to mariadb:10.5
-
-# Data export / import
-
-Here are some code snippets to handle Database data export / import, related to Seafile.
-
-## connect to database
-
-```bash
-export ROOT_PASSWORD=mysecretpassword
-mysql -uroot -p${ROOT_PASSWORD} -h mariadb.seafile.svc.cluster.local
-```
-
-## create databases
-
-```sql
-create database `ccnet_db` character set = 'utf8';
-create database `seafile_db` character set = 'utf8';
-create database `seahub_db` character set = 'utf8';
-
-create user 'seafile'@'%' identified by 'mysecretseafilepassword';
-
-GRANT ALL PRIVILEGES ON `ccnet_db`.* to `seafile`@`%`;
-GRANT ALL PRIVILEGES ON `seafile_db`.* to `seafile`@`%`;
-GRANT ALL PRIVILEGES ON `seahub_db`.* to `seafile`@`%`;
-```
-
-## export databases
-
-```bash
-export ROOT_PASSWORD=mysecretpassword
-
-for database in ccnet seafile seahub; do
-  mysqldump -uroot -p${ROOT_PASSWORD} -h mariadb.seafile.svc.cluster.local ${database}_db > ${database}_db.sql
-done
-```
-
-## import databases
-
-```bash
-export ROOT_PASSWORD=mysecretpassword
-
-for database in ccnet seafile seahub; do
-  mysql -uroot -p${ROOT_PASSWORD} -h mariadb.seafile.svc.cluster.local ${database}_db < ${database}_db.sql
-done
-```
